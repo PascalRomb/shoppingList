@@ -19,5 +19,5 @@ RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 EXPOSE 5000
-
+RUN chmod 755 backend-entrypoint.sh
 ENTRYPOINT ["./backend-entrypoint.sh"]
