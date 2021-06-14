@@ -10,6 +10,10 @@ ENV PYTHONUNBEFFERED 1
 #copy backend files
 COPY . .
 
+RUN apk add --no-cache postgresql-libs
+RUN apk add --no-cache gcc musl-dev postgresql-dev
+RUN apk add build-base
+
 #upgrade and install dependenciesc
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
