@@ -1,9 +1,5 @@
-from flask import Flask
-
-app = Flask(__name__)
-
-from .controller import controller
-app.register_blueprint(controller, url_prefix='/api/v1')
+from .configuration import configure
+app = configure('development')  # put in os.environment for 12 factor
 
 if __name__ == '__main__':
     app.run()
