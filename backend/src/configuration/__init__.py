@@ -11,8 +11,11 @@ def configure(environment):
     app.config.from_object(get_configuration(environment))
     db.init_app(app)
 
-    from ..controller import controller
-    app.register_blueprint(controller, url_prefix='/api/v1')
+    from ..controllers import controllers
+    app.register_blueprint(controllers, url_prefix='/api/v1')
+
+    from ..models import models
+    app.register_blueprint(models)
 
     return app
 
