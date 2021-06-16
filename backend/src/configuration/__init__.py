@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
-from .config import Config
+from .config import DevelopmentConfig, ProductionConfig
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -24,4 +24,4 @@ def configure(environment):
 
 
 def get_configuration(environment):
-    return Config
+    return DevelopmentConfig if environment == 'development' else ProductionConfig
