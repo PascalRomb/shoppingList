@@ -8,3 +8,11 @@ class ShoppingList(db.Model):
     name = db.Column(db.String(64), unique=True, index=True)
     products = db.relationship('Product', backref='shopping_list', lazy='dynamic')
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            'name': self.name,
+            'products': self.products,
+            'owner_id': self.owner_id
+        }
