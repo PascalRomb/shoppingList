@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from . import controllers
 from ..configuration import db
-# for further information https://flask-login.readthedocs.io/en/latest/
+from ..configuration.TokenUtils import Token, preauthorize
 from ..models.User import User
 
 
@@ -38,18 +38,10 @@ def login_user():
     if not check_password_hash(user.password_hash, password):
         abort(401)
 
-    ## generate token and
-
-    return jsonify(user.to_dict(full=True)), 200
-
-
-@controllers.route('/auth/logout', methods=['GET'])
-def logout():
-    ## remove token
-    return 200
+    return Token.encode_token(user.id)
 
 
 @controllers.route('/auth/hello', methods=['GET'])
-##create token required decorator
+@preauthorize
 def say_hello_to_user():
     return "Hello user", 200
