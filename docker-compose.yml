@@ -23,6 +23,7 @@ services:
     container_name: flask_backend
     environment:
       - ENVIRONMENT=production
+      - RESOURCES=/app/resources/
     depends_on:
       - db
     ports:
