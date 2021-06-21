@@ -41,6 +41,19 @@ def login_user():
     return Token.encode_token(user.id)
 
 
+@controllers.route('/auth/logged_user', methods=['GET'])
+@preauthorize
+def get_logged_user():
+    bearer = request.headers['Authorization']
+    token = bearer.split()[1]
+    
+    user = Token.extract_user_from_token(token)
+    if user is None:
+        abort(404)
+
+    return jsonify(user.to_dict(full=True))
+
+
 @controllers.route('/auth/hello', methods=['GET'])
 @preauthorize
 def say_hello_to_user():

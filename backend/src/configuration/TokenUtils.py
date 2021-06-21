@@ -31,6 +31,21 @@ class Token:
         except Exception as e:
             return e
 
+    @staticmethod
+    def extract_user_from_token(token):
+
+        try:
+            uid, err = Token.decode_token(token)
+
+            if err:
+                return jsonify({'message': err})
+
+            return User.query.filter_by(id=uid).first()
+
+        except Exception as e:
+            raise e
+
+
 
 def preauthorize(view_function):
     @wraps(view_function)
@@ -42,15 +57,9 @@ def preauthorize(view_function):
         token = bearer.split()[1]
 
         try:
-            uid, err = Token.decode_token(token)
-
-            if err:
-                return jsonify({'message': err})
-
-            current_user = User.query.filter_by(id=uid).first()
-
+            Token.extract_user_from_token(token)
         except:
-            return abort(401)
+            abort(401)
 
         return view_function(*args, **kwargs)
 
