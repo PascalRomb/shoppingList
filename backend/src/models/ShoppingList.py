@@ -9,10 +9,17 @@ class ShoppingList(db.Model):
     products = db.relationship('Product', backref='shopping_list', lazy='dynamic')
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
-    def to_dict(self):
-        return {
+    def to_dict(self, full=False):
+        shopping_list_dict = {
             "id": self.id,
             'name': self.name,
-            'products': self.products,
             'owner_id': self.owner_id
         }
+
+        if full:
+            products = self.products.all()
+            if products is not None:
+                shopping_list_dict['products'] = [product.to_dict() for product in products]
+
+        return shopping_list_dict
+

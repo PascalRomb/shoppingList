@@ -19,7 +19,9 @@ class User(UserMixin, db.Model):
         }
 
         if full:
-            user_dict['shopping_lists'] = self.shopping_lists.all()
+            lists = self.shopping_lists.all()
+            if list is not None:
+                user_dict['shopping_lists'] = [shopping_list.to_dict() for shopping_list in lists]
 
 
         return user_dict
