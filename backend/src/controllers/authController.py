@@ -9,9 +9,11 @@ from ..models.User import User
 
 @controllers.route('/auth/signup', methods=['POST'])
 def create_user():
-    email = request.form.get('email')
-    username = request.form.get('username')
-    password = request.form.get('password')
+    data = request.get_json()
+
+    email = data.get('email')
+    username = data.get('username')
+    password = data.get('password')
 
     user = User.query.filter((User.email == email) | (User.username == username)).first()
 
@@ -27,10 +29,15 @@ def create_user():
 
 @controllers.route('/auth/login', methods=['POST'])
 def login_user():
-    password = request.form.get('password')
-    email_username = request.form.get('email_username')
+    data = request.get_json()
+    password = data.get('password')
+    email = data.get('email')
+    username = data.get('username')
 
-    user = User.query.filter((User.email == email_username) | (User.username == email_username)).first()
+    if (email is None and username is None) or password is None:
+        abort(404)
+
+    user = User.query.filter((User.email == email) | (User.username == username)).first()
 
     if user is None:
         abort(404)
@@ -38,7 +45,7 @@ def login_user():
     if not check_password_hash(user.password_hash, password):
         abort(401)
 
-    return Token.encode_token(user.id)
+    return Token.encode_token(user.id), 200
 
 
 @controllers.route('/auth/logged_user', methods=['GET'])
