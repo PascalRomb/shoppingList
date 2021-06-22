@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-homepage',
@@ -7,7 +7,51 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomepageComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
+
+  public HEROES = [
+    {id: 1, name: 'Superman'},
+    {id: 2, name: 'Batman'},
+    {id: 5, name: 'BatGirl'},
+    {id: 3, name: 'Robin'},
+    {id: 4, name: 'Flash'},
+    {id: 1, name: 'Superman'},
+    {id: 2, name: 'Batman'},
+    {id: 5, name: 'BatGirl'},
+    {id: 3, name: 'Robin'},
+    {id: 4, name: 'Flash'},
+    {id: 1, name: 'Superman'},
+    {id: 2, name: 'Batman'},
+    {id: 5, name: 'BatGirl'},
+    {id: 3, name: 'Robin'},
+    {id: 4, name: 'Flash'},
+    {id: 1, name: 'Superman'},
+    {id: 2, name: 'Batman'},
+    {id: 5, name: 'BatGirl'},
+    {id: 3, name: 'Robin'},
+    {id: 4, name: 'Flash'},
+    {id: 1, name: 'Superman'},
+    {id: 2, name: 'Batman'},
+    {id: 5, name: 'BatGirl'},
+    {id: 3, name: 'Robin'},
+    {id: 4, name: 'Flash'},
+    {id: 1, name: 'Superman'},
+    {id: 2, name: 'Batman'},
+    {id: 5, name: 'BatGirl'},
+    {id: 3, name: 'Robin'},
+    {id: 4, name: 'Flash'},
+    {id: 1, name: 'Superman'},
+    {id: 2, name: 'Batman'},
+    {id: 5, name: 'BatGirl'},
+    {id: 3, name: 'Robin'},
+    {id: 4, name: 'Flash'},
+    {id: 1, name: 'Superman'},
+    {id: 2, name: 'Batman'},
+    {id: 5, name: 'BatGirl'},
+    {id: 3, name: 'Robin'},
+    {id: 4, name: 'Flash'}
+  ];
 
   ngOnInit(): void {
   }
