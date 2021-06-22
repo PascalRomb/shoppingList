@@ -9,19 +9,21 @@ from ..controllers import controllers
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 @controllers.route("/static/<filename>")
-#@preauthorize
+@preauthorize
 def serve_static(filename):
     return send_from_directory(os.environ.get('RESOURCES'), filename)
 
+
+# build filename with hash of file's info => check if file already exists and if not then save.
 def upload_files(file):
     if file is None or file.filename == '' or not allowed_file(file.filename):
-        return False
+        return None
 
     ext = get_extension(file.filename)
     name = uuid.uuid4().hex[:50]
     filename = name + "." + ext
     file.save(os.path.join(os.environ.get('RESOURCES'), filename))
-    return True
+    return filename
 
 
 # for further info, visit https://flask.palletsprojects.com/en/2.0.x/patterns/fileuploads/

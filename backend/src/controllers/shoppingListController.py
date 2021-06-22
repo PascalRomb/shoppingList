@@ -46,11 +46,10 @@ def get_lists_for_logged_user():
     return jsonify([shopping_list.to_dict() for shopping_list in lists]), 200
 
 
-#is id enough or may i search for id and owner_id? for security reasons
+# is id enough or may i search for id and owner_id? for security reasons
 @controllers.route("/shoppinglists/<id>", methods=['GET'])
 @preauthorize
 def get_list(id):
-
     shopping_list = ShoppingList.query.filter_by(id=id).first()
 
     if shopping_list is None:
