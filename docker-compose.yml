@@ -28,3 +28,12 @@ services:
       - db
     ports:
     - 5000:5000
+
+  frontend:
+    build: frontend/
+    container_name: angular_frontend
+    depends_on:
+      - db
+      - backend
+    ports:
+    - 80:80
