@@ -1,2 +1,4 @@
 .idea/
 backend/venv/
+backend/resources/*
+!backend/resources/.gitkeep
