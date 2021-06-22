@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+  <div class="container-fluid">
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto mr-5">
+        <li class="nav-item mr-3">
+          <a class="nav-link active" aria-current="page" href="#">Le tue liste</a>
+        </li>
+
+        <li class="nav-item dropdown ml-3" dropdown>
+          <a dropdownToggle type="button" class="nav-link dropdown-toggle" mdbWavesEffect>
+            <i class="fas fa-user"></i> Profile<span class="caret"></span></a>
+          <div *dropdownMenu class="dropdown-menu dropdown-menu-left dropdown dropdown-primary" role="menu">
+            <a class="dropdown-item waves-light" mdbWavesEffect href="#">Change password</a>
+            <a class="dropdown-item waves-light" mdbWavesEffect href="#">Log out</a>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
