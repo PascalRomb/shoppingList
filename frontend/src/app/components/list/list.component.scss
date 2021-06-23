@@ -1,0 +1,28 @@
+.example {
+  scrollbar-width: thin;  /* Firefox */
+}
+
+.example::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+.example::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.example::-webkit-scrollbar-thumb {
+  background: #e6e6e6;
+  border-radius:60px;
+}
+
+/* Handle on hover */
+.example::-webkit-scrollbar-thumb:hover {
+  background: #cccccc;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}

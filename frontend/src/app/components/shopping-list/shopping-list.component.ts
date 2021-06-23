@@ -1,15 +1,17 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
-  selector: 'app-homepage',
-  templateUrl: './homepage.component.html',
-  styleUrls: ['./homepage.component.scss']
+  selector: 'app-shopping-list',
+  templateUrl: './shopping-list.component.html',
+  styleUrls: ['./shopping-list.component.scss']
 })
-export class HomepageComponent implements OnInit {
+export class ShoppingListComponent implements OnInit {
 
-  constructor(private _router:Router) {
-  }
+  public id;
+  constructor(private _activatedRoute: ActivatedRoute) { }
+  public selectedList = null;
+
 
   public HEROES = [
     {id: 1, name: 'Superman'},
@@ -55,9 +57,10 @@ export class HomepageComponent implements OnInit {
   ];
 
   ngOnInit(): void {
+    this.id = this._activatedRoute.snapshot.paramMap.get('id');
   }
 
-  onClickElement(item: any) {
-    this._router.navigate(['/shopping_list', item.id]);
+  onClickItem(item: any) {
+    this.selectedList = item.id;
   }
 }
