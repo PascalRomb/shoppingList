@@ -45,7 +45,7 @@ def login_user():
     if not check_password_hash(user.password_hash, password):
         abort(401)
 
-    return Token.encode_token(user.id), 200
+    return jsonify(Token.encode_token(user.id)), 200
 
 
 @controllers.route('/auth/logged_user', methods=['GET'])

@@ -2,6 +2,7 @@ from flask import Flask
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from .config import DevelopmentConfig, ProductionConfig
+from flask_cors import CORS
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -9,7 +10,7 @@ migrate = Migrate()
 
 def configure(environment):
     app = Flask(__name__)
-
+    CORS(app)
     app.config.from_object(get_configuration(environment))
     db.init_app(app)
     migrate.init_app(app, db)
