@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="mt-5">
+    <div>
+      <div class="form-group">
+        <label for="username">Email address</label>
+        <input [(ngModel)]="username" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Enter email">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input [(ngModel)]="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input [(ngModel)]="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+      </div>
+      <button (click)="onSignup()"  class="btn btn-primary">Signup</button>
+      <span class="ml-2">Hai già un account?
+        <a [routerLink]="['/login']">Entra ora</a>
+      </span>
+    </div>
+  </div>
+</div>
