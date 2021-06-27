@@ -1,36 +1,39 @@
 <app-navbar></app-navbar>
-<div class="mt-5 mx-5">
+<div class="mt-2 mx-5">
   <div class="d-flex flex-row justify-content-between">
     <div class="w-25">
-      <app-list [items]="HEROES" height="30vh" [title]="'Lista'" (onClickElementEmitter)="onClickItem($event)"></app-list>
+      <app-list [items]="products" height="20vh" [title]="'Lista'" (onClickElementEmitter)="onClickItem($event)"></app-list>
 
-      <div id="form" class="mt-2">
+      <div id="form" class="mt-1">
         <h3>Aggiungi alla Lista</h3>
-        <form class="pt-2">
+        <div class="pt-2">
           <div class="form-group">
             <label for="productName">Prodotto</label>
-            <input class="form-control" id="productName">
+            <input [(ngModel)]="productName"  class="form-control" id="productName">
           </div>
           <div class="form-group">
             <label for="quantity">Quantità</label>
-            <input class="form-control" id="quantity">
+            <input [(ngModel)]="productQty" class="form-control" id="quantity">
           </div>
           <div class="form-group">
             <label for="imageUploader">Immagine</label>
-            <input type="file" class="form-control" id="imageUploader" placeholder="Upload file..">
+            <input type="file"
+                   id="file"
+                   class="form-control" id="imageUploader" placeholder="Upload file.."
+                   (change)="productImage = ($event.target.files)">
           </div>
           <div class="form-group">
             <label for="description">Descrizione</label>
-            <textarea class="form-control" id="description" rows="2"></textarea>
+            <textarea [(ngModel)]="productDescription"  class="form-control" id="description" rows="2"></textarea>
           </div>
-          <button type="submit" class="btn btn-primary w-100">Aggiungi alla lista</button>
-        </form>
+          <button type="submit" class="btn btn-primary w-100" (click)="onAddProduct()">Aggiungi alla lista</button>
+        </div>
       </div>
     </div>
 
-    <div *ngIf="selectedList != null" style="height: 80vh; border-left: 1px solid gray;"></div> <!--dunno-->
-    <div class="w-50" *ngIf="selectedList != null">
-      <app-product></app-product>
+    <div *ngIf="selectedProduct != null" style="height: 80vh; border-left: 1px solid gray;"></div> <!--dunno-->
+    <div class="w-50" *ngIf="selectedProduct != null">
+      <app-product [product]="selectedProduct"></app-product>
     </div>
 
   </div>

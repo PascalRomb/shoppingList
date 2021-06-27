@@ -1,7 +1,9 @@
+import {Product} from "./Product";
 
 export class ShoppingList {
   name: string;
   owner_id: number;
+  products: Product[];
 
 
 

@@ -23,7 +23,7 @@ export function jwtOptionsFactory(authService: AuthService) {
     tokenGetter: () => {
       return authService.getToken();
     },
-    whitelistedDomains: ['localhost:5000']
+    whitelistedDomains: [URL]
   }
 }
 

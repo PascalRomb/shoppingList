@@ -1,4 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Product} from "../../models/Product";
+import {HttpInterceptor} from "../../interceptors/http.interceptor";
 
 @Component({
   selector: 'app-product',
@@ -7,7 +9,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class ProductComponent implements OnInit {
 
-  @Input() product = {quantity:3, name:'Mele', description:'frutto di origine italiana', imagePath:""}
+  @Input() product: Product;
 
   constructor() { }
 
@@ -15,8 +17,9 @@ export class ProductComponent implements OnInit {
   }
 
   public getUrl(imagePath) {
+    console.log("imagePath" , imagePath)
     if(imagePath == null || imagePath == '') return "assets/placeholder-image.png";
-    return imagePath;
+    return HttpInterceptor.URL + "/api/v1/static/" + imagePath;
   }
 
 }

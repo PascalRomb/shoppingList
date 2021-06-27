@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+import {Product} from "../../models/Product";
+import {ShoppingListService} from "../../services/shopping-list.service";
+import {ProductService} from "../../services/product.service";
 
 @Component({
   selector: 'app-shopping-list',
@@ -7,60 +10,61 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./shopping-list.component.scss']
 })
 export class ShoppingListComponent implements OnInit {
+  public list_id;
+  public products: Product[];
+  public selectedProduct = null;
 
-  public id;
-  constructor(private _activatedRoute: ActivatedRoute) { }
-  public selectedList = null;
+  public productName: string;
+  public productDescription: string;
+  public productQty: number;
+  public productImage;
+
+  constructor(private _activatedRoute: ActivatedRoute,
+              private shoppingListService: ShoppingListService,
+              private productService: ProductService) { }
 
 
-  public HEROES = [
-    {id: 1, name: 'Superman'},
-    {id: 2, name: 'Batman'},
-    {id: 5, name: 'BatGirl'},
-    {id: 3, name: 'Robin'},
-    {id: 4, name: 'Flash'},
-    {id: 1, name: 'Superman'},
-    {id: 2, name: 'Batman'},
-    {id: 5, name: 'BatGirl'},
-    {id: 3, name: 'Robin'},
-    {id: 4, name: 'Flash'},
-    {id: 1, name: 'Superman'},
-    {id: 2, name: 'Batman'},
-    {id: 5, name: 'BatGirl'},
-    {id: 3, name: 'Robin'},
-    {id: 4, name: 'Flash'},
-    {id: 1, name: 'Superman'},
-    {id: 2, name: 'Batman'},
-    {id: 5, name: 'BatGirl'},
-    {id: 3, name: 'Robin'},
-    {id: 4, name: 'Flash'},
-    {id: 1, name: 'Superman'},
-    {id: 2, name: 'Batman'},
-    {id: 5, name: 'BatGirl'},
-    {id: 3, name: 'Robin'},
-    {id: 4, name: 'Flash'},
-    {id: 1, name: 'Superman'},
-    {id: 2, name: 'Batman'},
-    {id: 5, name: 'BatGirl'},
-    {id: 3, name: 'Robin'},
-    {id: 4, name: 'Flash'},
-    {id: 1, name: 'Superman'},
-    {id: 2, name: 'Batman'},
-    {id: 5, name: 'BatGirl'},
-    {id: 3, name: 'Robin'},
-    {id: 4, name: 'Flash'},
-    {id: 1, name: 'Superman'},
-    {id: 2, name: 'Batman'},
-    {id: 5, name: 'BatGirl'},
-    {id: 3, name: 'Robin'},
-    {id: 4, name: 'Flash'}
-  ];
 
   ngOnInit(): void {
-    this.id = this._activatedRoute.snapshot.paramMap.get('id');
+    this.list_id = this._activatedRoute.snapshot.paramMap.get('id');
+    this.populateProducts();
   }
 
   onClickItem(item: any) {
-    this.selectedList = item.id;
+    if(item.id) {
+      this.productService.getOne(item.id).subscribe(value => {
+        if(value) {
+          console.log(value);
+          this.selectedProduct = value;
+        }
+      })
+
+    }
   }
+
+  private populateProducts() {
+    if(this.list_id) {
+      this.shoppingListService.getOne(this.list_id).subscribe(value => {
+        if(value) {
+          this.products = value.products;
+        }
+      }, error => console.error(error))
+    }
+  }
+
+  public onAddProduct() {
+    if(this.productName && this.productDescription && this.productQty) {
+      let product = new Product(this.productName, this.productDescription, this.productQty, this.list_id);
+      this.productService.create(product, this.productImage).subscribe(value => {
+        this.productName = undefined;
+        this.productDescription = undefined;
+        this.productQty = undefined;
+        this.productImage = undefined;
+      }, error => console.error(error));
+    }
+
+  }
+
+
 }
+

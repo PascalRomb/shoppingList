@@ -18,6 +18,10 @@ export class ShoppingListService {
     return this.http.get<ShoppingList[]>("/api/v1/shoppinglists");
   }
 
+  public getOne(list_id): Observable<ShoppingList> {
+      return this.http.get<ShoppingList>("/api/v1/shoppinglists/" + list_id)
+  }
+
 
   public create_list(nameList: string){
     let userId = this.authService.getLoggedUserId()
