@@ -26,6 +26,6 @@ export class ShoppingListService {
   public create_list(nameList: string){
     let userId = this.authService.getLoggedUserId()
     let shoppingList = new ShoppingList(nameList, userId);
-    return this.http.post<ShoppingList>("/api/v1/shoppinglist", shoppingList);
+    return this.http.post<ShoppingList>("/api/v1/shoppinglists", shoppingList);
   }
 }

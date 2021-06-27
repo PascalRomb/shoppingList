@@ -60,6 +60,7 @@ export class ShoppingListComponent implements OnInit {
         this.productDescription = undefined;
         this.productQty = undefined;
         this.productImage = undefined;
+        this.populateProducts();
       }, error => console.error(error));
     }
 

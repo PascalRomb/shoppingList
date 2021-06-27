@@ -7,7 +7,7 @@ from ..models.ShoppingList import ShoppingList
 from ..models.User import User
 
 
-@controllers.route("/shoppinglist", methods=['POST'])
+@controllers.route("/shoppinglists", methods=['POST'])
 @preauthorize
 def create_list():
     data = request.get_json()
@@ -56,3 +56,13 @@ def get_list(id):
         abort(404)
 
     return jsonify(shopping_list.to_dict(full=True)), 200
+
+
+@controllers.route("/shoppinglists/<id>", methods=['DELETE'])
+@preauthorize
+def delete_list(id):
+    shopping_list = db.session.query(ShoppingList).filter(ShoppingList.id==id).first()
+    db.session.delete(shopping_list)
+    db.session.commit()
+
+    return ('', 204)
