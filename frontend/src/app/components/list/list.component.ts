@@ -7,7 +7,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class ListComponent implements OnInit {
 
-  @Input() items: [];
+  @Input() items: any[];
   @Input() height: any;
   @Input() title: string = "Le tue liste";
   @Output() onClickElementEmitter: EventEmitter<any> = new EventEmitter<any>();

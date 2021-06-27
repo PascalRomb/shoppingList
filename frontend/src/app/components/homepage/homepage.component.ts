@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
+import {ShoppingListService} from "../../services/shopping-list.service";
+import {ShoppingList} from "../../models/ShoppingList";
 
 @Component({
   selector: 'app-homepage',
@@ -8,56 +10,35 @@ import {Router} from "@angular/router";
 })
 export class HomepageComponent implements OnInit {
 
-  constructor(private _router:Router) {
+  public shoppingListName: string;
+  public shoppingLists: ShoppingList[];
+  constructor(private _router:Router, private _shoppingListService: ShoppingListService) {
   }
 
-  public HEROES = [
-    {id: 1, name: 'Superman'},
-    {id: 2, name: 'Batman'},
-    {id: 5, name: 'BatGirl'},
-    {id: 3, name: 'Robin'},
-    {id: 4, name: 'Flash'},
-    {id: 1, name: 'Superman'},
-    {id: 2, name: 'Batman'},
-    {id: 5, name: 'BatGirl'},
-    {id: 3, name: 'Robin'},
-    {id: 4, name: 'Flash'},
-    {id: 1, name: 'Superman'},
-    {id: 2, name: 'Batman'},
-    {id: 5, name: 'BatGirl'},
-    {id: 3, name: 'Robin'},
-    {id: 4, name: 'Flash'},
-    {id: 1, name: 'Superman'},
-    {id: 2, name: 'Batman'},
-    {id: 5, name: 'BatGirl'},
-    {id: 3, name: 'Robin'},
-    {id: 4, name: 'Flash'},
-    {id: 1, name: 'Superman'},
-    {id: 2, name: 'Batman'},
-    {id: 5, name: 'BatGirl'},
-    {id: 3, name: 'Robin'},
-    {id: 4, name: 'Flash'},
-    {id: 1, name: 'Superman'},
-    {id: 2, name: 'Batman'},
-    {id: 5, name: 'BatGirl'},
-    {id: 3, name: 'Robin'},
-    {id: 4, name: 'Flash'},
-    {id: 1, name: 'Superman'},
-    {id: 2, name: 'Batman'},
-    {id: 5, name: 'BatGirl'},
-    {id: 3, name: 'Robin'},
-    {id: 4, name: 'Flash'},
-    {id: 1, name: 'Superman'},
-    {id: 2, name: 'Batman'},
-    {id: 5, name: 'BatGirl'},
-    {id: 3, name: 'Robin'},
-    {id: 4, name: 'Flash'}
-  ];
-
   ngOnInit(): void {
+    this.populateLists();
   }
 
   onClickElement(item: any) {
     this._router.navigate(['/shopping_list', item.id]);
+  }
+
+  private populateLists() {
+    this._shoppingListService.retrieve_lists().subscribe(value => {
+      if(value) {
+        this.shoppingLists = value;
+      }
+    }, error => console.error(error));
+  }
+
+  public onAddList() {
+    if(this.shoppingListName){
+      this._shoppingListService.create_list(this.shoppingListName).subscribe(value => {
+        this.populateLists();
+        this.shoppingListName = undefined;
+      },error => console.error(error))
+
+    }
+
   }
 }

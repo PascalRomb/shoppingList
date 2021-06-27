@@ -3,16 +3,16 @@
   <div class="w-25"></div>
 
   <div class="w-50 mx-5">
-    <app-list [items]=HEROES (onClickElementEmitter)="onClickElement($event)" height="50vh"></app-list>
+    <app-list [items]=shoppingLists (onClickElementEmitter)="onClickElement($event)" height="50vh"></app-list>
     <div id="addListForm" class="mt-5 pt-4">
       <h3>Aggiungi Lista</h3>
-      <form>
+      <div>
         <div class="form-group">
-          <label for="exampleInputEmail1">Nome</label>
-          <input class="form-control" id="exampleInputEmail1">
+          <label  for="exampleInputEmail1">Nome</label>
+          <input class="form-control" id="exampleInputEmail1"  [(ngModel)]="shoppingListName">
         </div>
-        <button type="submit" class="btn btn-primary w-100">Aggiungi</button>
-      </form>
+        <button type="submit" class="btn btn-primary w-100" (click)="onAddList()">Aggiungi</button>
+      </div>
     </div>
   </div>
   <div class="w-25"></div>

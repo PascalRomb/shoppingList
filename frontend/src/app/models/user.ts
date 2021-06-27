@@ -6,6 +6,7 @@ export class User {
     this.password = password;
   }
 
+  id:number;
   username: string;
   email: string;
   password: string;
