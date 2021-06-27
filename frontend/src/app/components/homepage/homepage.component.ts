@@ -23,6 +23,12 @@ export class HomepageComponent implements OnInit {
     this._router.navigate(['/shopping_list', item.id]);
   }
 
+  onDeleteElement(item: any) {
+    this._shoppingListService.delete(item.id).subscribe(value => {
+      this.populateLists();
+    }, error => console.error(error));
+  }
+
   private populateLists() {
     this._shoppingListService.retrieve_lists().subscribe(value => {
       if(value) {

@@ -3,7 +3,7 @@
   <div class="w-25"></div>
 
   <div class="w-50 mx-5">
-    <app-list [items]=shoppingLists (onClickElementEmitter)="onClickElement($event)" height="50vh"></app-list>
+    <app-list [items]=shoppingLists (onClickElementEmitter)="onClickElement($event)" (onDeleteElementEmitter)="onDeleteElement($event)" height="50vh"></app-list>
     <div id="addListForm" class="mt-5 pt-4">
       <h3>Aggiungi Lista</h3>
       <div>

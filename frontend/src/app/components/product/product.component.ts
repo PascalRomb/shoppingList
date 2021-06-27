@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Product} from "../../models/Product";
 import {HttpInterceptor} from "../../interceptors/http.interceptor";
+import {ProductService} from "../../services/product.service";
 
 @Component({
   selector: 'app-product',
@@ -10,6 +11,7 @@ import {HttpInterceptor} from "../../interceptors/http.interceptor";
 export class ProductComponent implements OnInit {
 
   @Input() product: Product;
+  @Output() onDeleteEventEmitter: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() { }
 
@@ -22,4 +24,7 @@ export class ProductComponent implements OnInit {
     return HttpInterceptor.URL + "/api/v1/static/" + imagePath;
   }
 
+  onBuy() {
+    this.onDeleteEventEmitter.emit(this.product);
+  }
 }

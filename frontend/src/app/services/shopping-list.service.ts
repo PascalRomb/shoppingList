@@ -22,6 +22,10 @@ export class ShoppingListService {
       return this.http.get<ShoppingList>("/api/v1/shoppinglists/" + list_id)
   }
 
+  public delete(list_id) {
+    return this.http.delete("/api/v1/shoppinglists/" + list_id)
+  }
+
 
   public create_list(nameList: string){
     let userId = this.authService.getLoggedUserId()

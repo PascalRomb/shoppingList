@@ -15,10 +15,14 @@ export class ProductService {
     return this.http.get<Product>("/api/v1/products/" + productId);
   }
 
+  public delete(productId) {
+    return this.http.delete("/api/v1/products/" + productId);
+  }
+
   public create(product: Product, productImage) {
-    console.log("product image", productImage)
     const formData: FormData = new FormData();
-    formData.append('files', productImage[0], productImage[0].name);
+    if(productImage)
+      formData.append('files', productImage[0], productImage[0]?.name);
     formData.append('name', product.name);
     formData.append('description', product.description);
     formData.append('quantity', product.quantity.toString());

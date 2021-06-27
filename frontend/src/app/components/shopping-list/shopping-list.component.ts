@@ -34,11 +34,19 @@ export class ShoppingListComponent implements OnInit {
     if(item.id) {
       this.productService.getOne(item.id).subscribe(value => {
         if(value) {
-          console.log(value);
           this.selectedProduct = value;
         }
       })
 
+    }
+  }
+
+  onDeleteItem(item:any) {
+    if(item.id) {
+      this.productService.delete(item.id).subscribe(value => {
+        this.populateProducts();
+        this.selectedProduct = undefined;
+      }, error => console.error(error))
     }
   }
 
@@ -67,5 +75,8 @@ export class ShoppingListComponent implements OnInit {
   }
 
 
+  onDeleteProduct(item: any) {
+    this.onDeleteItem(item);
+  }
 }
 

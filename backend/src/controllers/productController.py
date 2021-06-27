@@ -69,7 +69,7 @@ def update_product():
 @controllers.route("/products/<id>", methods=['DELETE'])
 @preauthorize
 def delete_product(id):
-    Product.query.filter_by(id=id).first()
+    Product.query.filter_by(id=id).delete()
     db.session.commit()
 
     return ('', 204)

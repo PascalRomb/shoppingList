@@ -2,7 +2,9 @@
 <div class="mt-2 mx-5">
   <div class="d-flex flex-row justify-content-between">
     <div class="w-25">
-      <app-list [items]="products" height="20vh" [title]="'Lista'" (onClickElementEmitter)="onClickItem($event)"></app-list>
+      <app-list [items]="products" height="20vh" [title]="'Lista'"
+                (onClickElementEmitter)="onClickItem($event)"
+                (onDeleteElementEmitter)="onDeleteItem($event)"></app-list>
 
       <div id="form" class="mt-1">
         <h3>Aggiungi alla Lista</h3>
@@ -33,7 +35,7 @@
 
     <div *ngIf="selectedProduct != null" style="height: 80vh; border-left: 1px solid gray;"></div> <!--dunno-->
     <div class="w-50" *ngIf="selectedProduct != null">
-      <app-product [product]="selectedProduct"></app-product>
+      <app-product [product]="selectedProduct" (onDeleteEventEmitter)="onDeleteProduct($event)"></app-product>
     </div>
 
   </div>

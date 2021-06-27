@@ -5,8 +5,9 @@
   <img src="{{getUrl(product.image_path)}}"
        width="500" height="400"/>
   <div id="buttons" class="mt-3">
-    <button class="btn btn-primary btn-sm">Acquistato</button>
-    <button  style="color: #0B5ED7" class="btn btn-sm ml-2">Modifica<i class="ml-1 fas fa-chevron-right" style="font-size: 14px; color: #0B5ED7"></i></button>
+    <button class="btn btn-primary btn-sm" (click)="onBuy()">Acquistato</button>
+    <!--no time for update, api works-->
+    <button  style="color: #0B5ED7" class="btn btn-sm ml-2" [disabled]="true">Modifica<i class="ml-1 fas fa-chevron-right" style="font-size: 14px; color: #0B5ED7"></i></button>
   </div>
 
 </div>

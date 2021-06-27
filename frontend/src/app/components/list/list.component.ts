@@ -11,6 +11,7 @@ export class ListComponent implements OnInit {
   @Input() height: any;
   @Input() title: string = "Le tue liste";
   @Output() onClickElementEmitter: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onDeleteElementEmitter: EventEmitter<any> = new EventEmitter<any>();
   constructor() { }
 
   ngOnInit(): void {
@@ -18,6 +19,10 @@ export class ListComponent implements OnInit {
 
   public onClickElement(element: any) {
     this.onClickElementEmitter.emit(element);
+  }
+
+  public onDeleteElement(element: any) {
+    this.onDeleteElementEmitter.emit(element);
   }
 
 }
